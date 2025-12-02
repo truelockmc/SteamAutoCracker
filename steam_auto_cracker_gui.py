@@ -85,11 +85,17 @@ try: # Handles Python errors to write them to a log file so they can be reported
         # Determine the folder path based on the event type
         if event:  # Handling drag and drop
             folder_path_temp = event.data.strip("{}").replace("\\", "/") # Returns the directory with no "/" at the end
+
         else:  # Handling button click
             initial_dir = "/"
             if last_selected_folder != "" and os.path.isdir(last_selected_folder):
                 initial_dir = last_selected_folder
             folder_path_temp = filedialog.askdirectory(initialdir=initial_dir) # Returns the directory with no "/" at the end
+
+            # Fix to work on Linux: Tkinter: tuple → string
+            if isinstance(folder_path_temp, tuple):
+                folder_path_temp = folder_path_temp[0]
+
 
         if os.path.isdir(folder_path_temp):
             folder_path = folder_path_temp
