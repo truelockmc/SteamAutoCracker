@@ -85,7 +85,6 @@ try: # Handles Python errors to write them to a log file so they can be reported
         # Determine the folder path based on the event type
         if event:  # Handling drag and drop
             folder_path_temp = event.data.strip("{}").replace("\\", "/") # Returns the directory with no "/" at the end
-
         else:  # Handling button click
             initial_dir = "/"
             if last_selected_folder != "" and os.path.isdir(last_selected_folder):
